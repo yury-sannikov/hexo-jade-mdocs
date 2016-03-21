@@ -1,0 +1,50 @@
+section#home.divider.parallax(data-stellar-background-ratio='0.5', data-bg-img='http://placehold.it/1920x1280')
+  .display-table
+    .display-table-cell
+      .container
+        .row
+          .col-md-4.col-md-offset-8
+            .bg-theme-colored.p-25
+              h3.m-0.mb-30
+                span.text-white Make an
+                |  Appointment
+              // Appointment Form
+              form#home_appointment_form(name='home_appointment_form', method='post', action='includes/appointment.php')
+                .row
+                  .col-sm-12
+                    .form-group.mb-10
+                      input#form_name.form-control(name='form_name', type='text', required='', placeholder='Enter Name', aria-required='true')
+                  .col-sm-12
+                    .form-group.mb-10
+                      input#form_email.form-control.required.email(name='form_email', type='email', placeholder='Enter Email', aria-required='true')
+                  .col-sm-12
+                    .form-group.mb-10
+                      input.form-control.required.date-picker(name='form_appontment_date', type='text', placeholder='Appoinment Date', aria-required='true')
+                .form-group.mb-10
+                  textarea#form_message.form-control.required(name='form_message', placeholder='Enter Message', rows='5', aria-required='true')
+                .form-group.mb-0.mt-10
+                  input#form_botcheck.form-control(name='form_botcheck', type='hidden', value='')
+                  button.btn.btn-gray.btn-flat(type='submit', data-loading-text='Please wait...') Send Message
+              // Appointment Form Validation
+              script(type='text/javascript').
+                $("#home_appointment_form").validate({
+                submitHandler: function(form) {
+                var form_btn = $(form).find('button[type="submit"]');
+                var form_result_div = '#form-result';
+                $(form_result_div).remove();
+                form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+                var form_btn_old_msg = form_btn.html();
+                form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                $(form).ajaxSubmit({
+                dataType:  'json',
+                success: function(data) {
+                if( data.status == 'true' ) {
+                $(form).find('.form-control').val('');
+                }
+                form_btn.prop('disabled', false).html(form_btn_old_msg);
+                $(form_result_div).html(data.message).fadeIn('slow');
+                setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
+                }
+                });
+                }
+                });

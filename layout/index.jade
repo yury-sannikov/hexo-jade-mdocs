@@ -1,12 +1,20 @@
 extends base
 
 block site_body
-  ul.post-items
-    each post in page.posts.toArray()
-      li.post-item
-        article.post.post--compact
-          h2.post-item__title
-            a(href=url_for(post.path))= post.title
-          .post__excerpt!= post.excerpt
+  // Section: home
+  include _partial/home_section
+  // Section: Welcome
+  include _partial/welcome_section
+  // Section: Services
+  include _partial/services_section
+  // Section: Specialities
+  include _partial/specialities_section
+  // Section: Doctors
+  include _partial/doctors_section
+  // Section: Testimonials
+  include _partial/testimonials_section
+  // Section: Gallery
+  include _partial/gallery_section
+  // Section: News
+  include _partial/news_section
 
-  include _partial/post/list_pagination

@@ -1,21 +1,34 @@
 doctype html
-html(lang="en")
-
+html(dir='ltr', lang='en')
   head
     include _partial/site/head
 
-  body
-    .site-page
-      header.site-header
-        .site-masthead
-          block site_header
-            h1.site__title
-              a(href=config.root)= config.title
-            p.site__subtitle= config.subtitle
-
-      section.site-body
+  body.has-side-panel.side-panel-right.fullwidth-page.side-push-panel(style="font-family: Raleway, sans-serif;")
+    .body-overlay
+    include _partial/site/side_panel
+    #wrapper.clearfix
+      // preloader
+      #preloader
+        #spinner
+          img(src='images/preloaders/1.gif', alt='')
+        #disable-preloader.btn.btn-default.btn-sm Disable Preloader
+      // Header
+      header#header.header
+        include _partial/site/header/top
+        include _partial/site/header/middle
+        include _partial/site/header/navigation
+      // Modal - Appontment Form Starts
+      include _partial/site/forms/modal_demo_appointment
+      // Modal - Appontment Form Ends
+      // Start main-content
+      .main-content
         block site_body
-
-      footer.site-footer
-        block site_footer
-          include _partial/site/footer
+      // end main-content
+      // Footer
+      block site_footer
+        include _partial/site/footer
+      a.scrollToTop(href='#')
+        i.fa.fa-angle-up
+    // end wrapper
+    // Footer Scripts
+    include _partial/site/footer_scripts

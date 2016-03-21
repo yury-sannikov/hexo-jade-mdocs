@@ -1,10 +1,88 @@
-nav.footer-nav
-  ul.footer-nav__items
-    li.footer-nav__item
-      a(href=url_for("about")) About
-    li.footer-nav__item
-      a(href=url_for("archives")) Archive
-    li.footer-nav__item
-      a(href="http://github.com/widatama/hexo-jade-starter") Source
-    li.footer-nav__item
-      a(href=theme.rss ? theme.rss : config.root + "rss2.xml") Feed
+footer#footer.footer.pb-0.bg-black-111
+  .container.pb-20
+    .row.multi-row-clearfix
+      .col-sm-6.col-md-3
+        .widget.dark
+          img(alt='', src='http://placehold.it/200x41')
+          p.font-12.mt-10.mb-10
+            | Medinova is a library of corporate and business templates with predefined web elements which helps you to build your own site.
+          a.btn.btn-default.btn-transparent.btn-xs.btn-flat.mt-5(href='#') Read more
+          ul.social-icons.icon-sm.icon-bordered.icon-circled.clearfix.mt-20
+            li
+              a(href='#')
+                i.fa.fa-facebook
+            li
+              a(href='#')
+                i.fa.fa-twitter
+            li
+              a(href='#')
+                i.fa.fa-instagram
+            li
+              a(href='#')
+                i.fa.fa-twitter
+            li
+              a(href='#')
+                i.fa.fa-instagram
+      .col-sm-6.col-md-3
+        .widget.dark
+          h5.widget-title.line-bottom Photos from Flickr
+          #flickr-feed.clearfix
+            script(type='text/javascript', src='http://www.flickr.com/badge_code_v2.gne?count=9&display=latest&size=s&layout=x&source=user&user=52617155@N08')
+      .col-sm-6.col-md-3
+        .widget.dark
+          h5.widget-title.line-bottom Quick Links
+          ul.list-border.list.theme-colored.angle-double-right
+            li
+              a(href='#') Privacy Policy
+            li
+              a(href='#') Donor Privacy Policy
+            li
+              a(href='#') Disclaimer
+            li
+              a(href='#') Terms of Use
+            li
+              a(href='#') Copyright Notice
+            li
+              a(href='#') Media Center
+      .col-sm-6.col-md-3
+        .widget.dark
+          h5.widget-title.line-bottom Quick Contact
+          ul.list.list-border
+            li
+              a(href='#') +(012) 345 6789
+            li
+              a(href='#') hello@yourdomain.com
+            li
+              a.lineheight-20(href='#') 121 King Street, Melbourne Victoria 3000, Australia
+          p.text-white.mb-5.mt-15 Subscribe to our newsletter
+          form#footer-mailchimp-subscription-form.newsletter-form.mt-10
+            label.display-block(for='mce-EMAIL')
+            .input-group
+              input#mce-EMAIL.form-control(type='email', value='', name='EMAIL', placeholder='Your Email', data-height='37px')
+              span.input-group-btn
+                button.btn.btn-colored.btn-theme-colored.m-0(type='submit')
+                  i.fa.fa-paper-plane-o.text-white
+          // Mailchimp Subscription Form Validation
+          script(type='text/javascript').
+            $('#footer-mailchimp-subscription-form').ajaxChimp({
+            callback: mailChimpCallBack,
+            url: '//thememascot.us9.list-manage.com/subscribe/post?u=a01f440178e35febc8cf4e51f&amp;id=49d6d30e1e'
+            });
+            function mailChimpCallBack(resp) {
+            // Hide any previous response text
+            var $mailchimpform = $('#footer-mailchimp-subscription-form'),
+            $response = '';
+            $mailchimpform.children(".alert").remove();
+            console.log(resp);
+            if (resp.result === 'success') {
+            $response = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
+            } else if (resp.result === 'error') {
+            $response = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
+            }
+            $mailchimpform.prepend($response);
+            }
+  .footer-nav.bg-black-222.p-20
+    .row.text-center
+      .col-md-12
+        p.text-white.font-11.m-0 Copyright ©2015 ThemeMascot. All Rights Reserved
+
